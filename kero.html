@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Mini Projects</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #0f172a;
+        color: white;
+      }
+
+      /* ================= NAVBAR ================= */
+
+      nav {
+        width: 100%;
+        background: #111827;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      }
+
+      nav h1 {
+        color: #ec4899;
+        font-size: 28px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        transition: 0.3s;
+        background: #1e293b;
+      }
+
+      .nav-links a:hover {
+        background: #3882f6;
+        transform: translateY(-2px);
+      }
+
+      /* ================= HERO ================= */
+
+      .hero {
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px;
+        background: linear-gradient(to bottom right, #111827, #1e293b);
+      }
+
+      .hero h2 {
+        font-size: 50px;
+        margin-bottom: 20px;
+        color: #ec4899;
+      }
+
+      .hero p {
+        font-size: 20px;
+        color: #cbd5e1;
+        max-width: 700px;
+        line-height: 1.7;
+      }
+
+      .hero button {
+        margin-top: 30px;
+        padding: 14px 25px;
+        border: none;
+        border-radius: 12px;
+        background: #3882f6;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .hero button:hover {
+        transform: scale(1.05);
+        background: #2563eb;
+      }
+
+      /* ================= SECTIONS ================= */
+
+      section {
+        padding: 80px 30px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+        background: #111827;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .section-title {
+        font-size: 40px;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #eab308;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 12px;
+        background: #374151;
+        color: white;
+        margin-bottom: 15px;
+        outline: none;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        transform: scale(1.04);
+      }
+
+      /* ================= TASK MANAGER ================= */
+
+      .add-btn {
+        background: #22c55e;
+        margin-bottom: 20px;
+      }
+
+      .task {
+        background: #1e293b;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .task-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .edit-btn {
+        background: #3882f6;
+      }
+
+      .delete-btn {
+        background: #ef4444;
+      }
+
+      /* ================= COLOR PALETTE ================= */
+
+      .palette-btn {
+        background: #ec4899;
+        margin-bottom: 30px;
+      }
+
+      #palette {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .color-box {
+        width: 170px;
+        height: 170px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 18px;
+      }
+
+      .color-box:hover {
+        transform: translateY(-8px);
+      }
+
+      /* ================= MODAL ================= */
+
+      .modal-open-btn {
+        background: #eab308;
+        color: black;
+      }
+
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+      }
+
+      #modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: #111827;
+        padding: 30px;
+        border-radius: 20px;
+        display: none;
+        opacity: 0;
+        transition: 0.3s;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      #modal.show {
+        opacity: 1;
+      }
+
+      .close {
+        float: right;
+        font-size: 28px;
+        cursor: pointer;
+        color: #ef4444;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 25px;
+      }
+
+      .confirm-btn {
+        background: #22c55e;
+      }
+
+      .cancel-btn {
+        background: #ef4444;
+      }
+
+      /* ================= FOOTER ================= */
+
+      footer {
+        text-align: center;
+        padding: 25px;
+        background: #111827;
+        color: #94a3b8;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .hero h2 {
+          font-size: 38px;
+        }
+
+        .task {
+          flex-direction: column;
+          gap: 15px;
+          align-items: flex-start;
+        }
+
+        #modal {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+      <h1>JS Projects</h1>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#tasks">Task Manager</a>
+        <a href="#palette-section">Color Palette</a>
+        <a href="#modal-section">Modal Popup</a>
+      </div>
+    </nav>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+      <h2>JavaScript Mini Projects</h2>
+
+      <p>
+        Interactive JavaScript mini projects with modern dark mode UI. Navigate
+        between sections using the navbar above.
+      </p>
+
+      <a href="#tasks">
+        <button>Explore Projects</button>
+      </a>
+    </section>
+
+    <!-- ================= TASK MANAGER ================= -->
+
+    <section id="tasks">
+      <div class="container">
+        <h2 class="section-title">Task Manager</h2>
+
+        <input type="text" id="taskInput" placeholder="Enter task..." />
+
+        <button class="add-btn" onclick="addTask()">Add Task</button>
+
+        <div id="taskList"></div>
+      </div>
+    </section>
+
+    <!-- ================= COLOR PALETTE ================= -->
+
+    <section id="palette-section">
+      <div class="container">
+        <h2 class="section-title">Color Palette Generator</h2>
+
+        <button class="palette-btn" onclick="generatePalette()">
+          Generate Palette
+        </button>
+
+        <div id="palette"></div>
+      </div>
+    </section>
+
+    <!-- ================= MODAL ================= -->
+
+    <section id="modal-section">
+      <div class="container">
+        <h2 class="section-title">Modal / Popup</h2>
+
+        <button class="modal-open-btn" id="openModal">Open Modal</button>
+      </div>
+    </section>
+
+    <!-- ================= OVERLAY ================= -->
+
+    <div id="overlay"></div>
+
+    <!-- ================= MODAL BOX ================= -->
+
+    <div id="modal">
+      <span class="close" id="closeModal"> &times; </span>
+
+      <h2 style="color: #ec4899; margin-bottom: 15px">Modal Title</h2>
+
+      <p style="line-height: 1.7; color: #cbd5e1">
+        This is the modal content. You can place forms, images, text, or any
+        HTML content here.
+      </p>
+
+      <div class="modal-actions">
+        <button class="confirm-btn" onclick="hideModal()">Confirm</button>
+
+        <button class="cancel-btn" onclick="hideModal()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>JavaScript Mini Projects © 2026</footer>
+
+    <script>
+      // ================= TASK MANAGER =================
+
+      let tasks = [];
+
+      const input = document.getElementById("taskInput");
+
+      const list = document.getElementById("taskList");
+
+      function addTask() {
+        if (input.value.trim() === "") {
+          alert("Please enter a task");
+          return;
+        }
+
+        const task = {
+          id: Date.now(),
+          text: input.value,
+        };
+
+        tasks.push(task);
+
+        input.value = "";
+
+        renderTasks();
+      }
+
+      function renderTasks() {
+        list.innerHTML = "";
+
+        tasks.forEach((task) => {
+          const div = document.createElement("div");
+
+          div.className = "task";
+
+          div.innerHTML = `
+
+          <span>${task.text}</span>
+
+          <div class="task-buttons">
+
+            <button class="edit-btn"
+            onclick="editTask(${task.id})">
+              Edit
+            </button>
+
+            <button class="delete-btn"
+            onclick="deleteTask(${task.id})">
+              Delete
+            </button>
+
+          </div>
+
+        `;
+
+          list.appendChild(div);
+        });
+      }
+
+      function editTask(id) {
+        const newText = prompt("Edit Task");
+
+        if (newText) {
+          tasks = tasks.map((task) =>
+            task.id === id ? { ...task, text: newText } : task,
+          );
+
+          renderTasks();
+        }
+      }
+
+      function deleteTask(id) {
+        tasks = tasks.filter((task) => task.id !== id);
+
+        renderTasks();
+      }
+
+      // ================= COLOR PALETTE =================
+
+      const palette = document.getElementById("palette");
+
+      const colors = ["#EF4444", "#22C55E", "#3882F6", "#EAB308", "#EC4899"];
+
+      function generatePalette() {
+        palette.innerHTML = "";
+
+        colors.forEach((color) => {
+          const box = document.createElement("div");
+
+          box.className = "color-box";
+
+          box.style.background = color;
+
+          box.textContent = color;
+
+          box.addEventListener("click", () => {
+            navigator.clipboard.writeText(color);
+
+            alert("Color copied!");
+          });
+
+          palette.appendChild(box);
+        });
+      }
+
+      generatePalette();
+
+      // ================= MODAL =================
+
+      const modal = document.getElementById("modal");
+
+      const overlay = document.getElementById("overlay");
+
+      const openBtn = document.getElementById("openModal");
+
+      const closeBtn = document.getElementById("closeModal");
+
+      function showModal() {
+        modal.style.display = "block";
+
+        overlay.style.display = "block";
+
+        setTimeout(() => {
+          modal.classList.add("show");
+        }, 10);
+      }
+
+      function hideModal() {
+        modal.classList.remove("show");
+
+        setTimeout(() => {
+          modal.style.display = "none";
+
+          overlay.style.display = "none";
+        }, 300);
+      }
+
+      openBtn.addEventListener("click", showModal);
+
+      closeBtn.addEventListener("click", hideModal);
+
+      overlay.addEventListener("click", hideModal);
+    </script>
+  </body>
+</html>
